@@ -1,12 +1,12 @@
-{ pkgs
-, inputs
-, outputs
-, ...
+{
+  pkgs,
+  inputs,
+  outputs,
+  ...
 }:
 
 {
   imports = [
-    # inputs.betterfox.homeManagerModules.betterfox
     inputs.spicetify-nix.homeManagerModules.default
     outputs.homeManagerModules
   ];

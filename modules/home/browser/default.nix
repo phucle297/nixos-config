@@ -16,7 +16,6 @@ let
 in
 {
   imports = [
-    # inputs.testfox.homeManagerModules.default
     inputs.zen-browser.homeModules.twilight
   ];
   programs.zen-browser = {
@@ -38,10 +37,6 @@ in
     # any other options under `programs.firefox` are also supported here.
     # see `man home-configuration.nix`.
   };
-  # textfox = {
-  #   enable = true;
-  #   profile = "default";
-  # };
   # programs.firefox = {
   #   enable = true;
   #   languagePacks = [ "en-US" ];

@@ -3,10 +3,12 @@
   home.packages = with pkgs; [
     # GUI
     vlc
-    xfce.thunar
+    # xfce.thunar
+    kdePackages.dolphin
     teams-for-linux
     slack
     imv
+    dbeaver-bin
     # jetbrains.datagrip
     # microsoft-edge
 

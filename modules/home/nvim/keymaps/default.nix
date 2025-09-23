@@ -5,12 +5,9 @@
     ./fzf.nix
     ./noice.nix
     ./window.nix
+    ./tree.nix
   ];
   programs.nixvim.keymaps = [
-    {
-      action = "<cmd>Neotree toggle<CR>";
-      key = "<leader>e";
-    }
     {
       action = ":noh<CR>";
       key = "<Esc>";

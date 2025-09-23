@@ -8,7 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # betterfox.url = "github:HeitorAugustoLN/betterfox-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -18,10 +17,6 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # zen-browser = {
-    #   url = "github:youwen5/zen-browser-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.inputs.home-manager.follows = "home-manager";

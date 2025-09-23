@@ -1,6 +1,6 @@
 {
   services.fnott = {
-    enable = false;
+    enable = true;
     settings = {
       main = {
         min-width = "200";
