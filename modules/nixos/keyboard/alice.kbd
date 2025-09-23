@@ -1,0 +1,99 @@
+;; Home row mods QWERTY example with more complexity.
+;; Some of the changes from the basic example:
+;; - when a home row mod activates tap, the home row mods are disabled
+;;   while continuing to type rapidly
+;; - tap-hold-release helps make the hold action more responsive
+;; - pressing another key on the same half of the keyboard
+;;   as the home row mod will activate an early tap action
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-time 150
+  hold-time 200
+  mw-interval 50
+  mw-distance 50
+  ma-interval 4
+  ma-distance 2
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+(deflayer base
+  @esc_grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @caps_esc @a    @s    @d    @f    _    _    @j    @k    @l    @;    _    _
+  _ _    _    _    _    _    _    _    _    _    _    _
+  @lctl_game _ _           @spc            _ _ _
+)
+
+(deflayer space
+  @esc_grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _         mbck    @mau    mfwd    _    @mwu    _    _    _    _    _    _    _    _
+  @caps_esc @mal   @mad    @mar   @f    @mwd    left    down    up    rght    _    _    _
+  @fst         mltp    mmtp    mrtp    _    _    _    _    _    _    _    @slw
+  lctl      _ _           spc            _ _ _
+)
+
+(deflayer game
+  @esc_grv  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @caps_esc _    _    _    _    _    _    _    _    _    _    _    _
+  _ _    _    _    _    _    _    _    _    _    _    _
+  @lctl_base _ _           _            _ _ _
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  esc_grv grv
+  caps_esc (tap-hold $tap-time $hold-time esc lctl)
+  lctl_game (layer-switch game)
+  lctl_base (layer-switch base)
+  spc  (tap-hold $tap-time $hold-time spc (layer-while-held space))
+
+  a (tap-hold $tap-time $hold-time a lmet)
+  s (tap-hold $tap-time $hold-time s lalt)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lctl)
+  j (tap-hold $tap-time $hold-time j rctl)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l ralt)
+  ; (tap-hold $tap-time $hold-time ; rmet)
+
+  mwu (mwheel-up $mw-interval $mw-distance)
+  mwd (mwheel-down $mw-interval $mw-distance)
+  mwl (mwheel-left $mw-interval $mw-distance)
+  mwr (mwheel-right $mw-interval $mw-distance)
+
+  mau (movemouse-up $ma-interval $ma-distance)
+  mad (movemouse-down $ma-interval $ma-distance)
+  mal (movemouse-left $ma-interval $ma-distance)
+  mar (movemouse-right $ma-interval $ma-distance)
+
+  fst (movemouse-speed 200)
+  slw (movemouse-speed 50)
+)

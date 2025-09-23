@@ -1,0 +1,76 @@
+;; Home row mods QWERTY example with more complexity.
+;; Some of the changes from the basic example:
+;; - when a home row mod activates tap, the home row mods are disabled
+;;   while continuing to type rapidly
+;; - tap-hold-release helps make the hold action more responsive
+;; - pressing another key on the same half of the keyboard
+;;   as the home row mod will activate an early tap action
+
+(defcfg
+  process-unmapped-keys yes
+)
+(defsrc
+  esc
+  caps
+  lctl  a   s   d   f   h   j   k   l   ;
+  spc
+)
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and index
+  ;; fingers faster.
+  tap-time 150
+  hold-time 200
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+(deflayer base
+  @esc_grv
+  @caps_game
+  @lctl_esc
+  @a  @s  @d  @f  h  @j  @k  @l  @;
+  @spc
+)
+
+(deflayer space
+          @esc_grv
+          @caps_base
+          @lctl_esc @a  @s  @d  @f left down up rght ;
+          spc
+)
+
+(deflayer game
+          @esc_grv
+          @caps_base
+          @lctl_esc a s d f h j k l ;
+          spc
+)
+
+(deffakekeys
+  to-base (layer-switch base)
+)
+(defalias
+  esc_grv grv
+  lctl_esc (tap-hold $tap-time $hold-time esc lctl)
+  caps_game (layer-switch game)
+  caps_base (layer-switch base)
+  spc  (tap-hold $tap-time $hold-time spc (layer-while-held space))
+
+  a (tap-hold $tap-time $hold-time a lmet)
+  s (tap-hold $tap-time $hold-time s lalt)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lctl)
+  j (tap-hold $tap-time $hold-time j rctl)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l ralt)
+  ; (tap-hold $tap-time $hold-time ; rmet)
+)
