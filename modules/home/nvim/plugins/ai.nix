@@ -9,6 +9,7 @@
     codecompanion = {
       enable = true;
       settings = {
+        copilot_suggest_hidden = false;
         strategies = {
           chat.adapters = "copilot";
           agent.adapters = "copilot";

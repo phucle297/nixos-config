@@ -30,12 +30,6 @@
         };
       };
     };
-    # yazi = {
-    #   enable = true;
-    #   lazyLoad.settings.keymap = [
-    #     "<leader>e"
-    #   ];
-    # };
     neo-tree = {
       enable = true;
       enableDiagnostics = true;
@@ -56,16 +50,17 @@
           x = "cut_to_clipboard";
           p = "paste_from_clipboard";
           l = "open";
-          h.__raw = ''
-            function(state)
-              local node = state.tree:get_node()
-              if node.type == "directory" and node:is_expanded() then
-                require("neo-tree.sources.filesystem.commands").close_node(state)
-              else
-                require("neo-tree.sources.filesystem.commands").navigate_up(state)
-              end
-            end
-          '';
+          h = "close_node";
+          # h.__raw = ''
+          #   function(state)
+          #     local node = state.tree:get_node()
+          #     if node.type == "directory" and node:is_expanded() then
+          #       require("neo-tree.sources.filesystem.commands").close_node(state)
+          #     else
+          #       require("neo-tree.sources.filesystem.commands").navigate_up(state)
+          #     end
+          #   end
+          # '';
         };
       };
     };
@@ -93,35 +88,33 @@
 
     toggleterm = {
       enable = true;
-      # settings = {
-      #   size = 20;
-      #   hide_numbers = true;
-      #   shade_filetypes = { };
-      #   shade_terminals = true;
-      #   shading_factor = 1;
-      #   start_in_insert = true;
-      #   insert_mappings = true;
-      #   persist_size = true;
-      #   direction = "horizontal";
-      #   close_on_exit = true;
-      #   # shell = vim.o.shell;
-      #   float_opts = {
-      #     border = "single";
-      #     # width = function()
-      #     # return math.floor(vim.o.columns * 0.8)
-      #     # end, -- 80% of the screen width
-      #     # height = function()
-      #     # return math.floor(vim.o.lines * 0.6)
-      #     # end, -- 60% of the screen height
-      #     # -- width = 200;
-      #     # -- height = 50;
-      #     winblend = 3;
-      #     highlights = {
-      #       border = "Normal";
-      #       background = "Normal";
-      #     };
-      #   };
-      # };
+      settings = {
+        size = 20;
+        hide_numbers = true;
+        shade_terminals = true;
+        shading_factor = 1;
+        start_in_insert = true;
+        insert_mappings = true;
+        persist_size = true;
+        direction = "horizontal";
+        close_on_exit = true;
+        float_opts = {
+          border = "single";
+          # width = function()
+          # return math.floor(vim.o.columns * 0.8)
+          # end, -- 80% of the screen width
+          # height = function()
+          # return math.floor(vim.o.lines * 0.6)
+          # end, -- 60% of the screen height
+          # -- width = 200;
+          # -- height = 50;
+          winblend = 3;
+          highlights = {
+            border = "Normal";
+            background = "Normal";
+          };
+        };
+      };
     };
   };
 }
