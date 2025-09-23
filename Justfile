@@ -9,7 +9,7 @@ history:
 
 [group('nix')]
 deploy:
-  sudo nixos-rebuild switch --flake . && notify-send "System Rebuild Sucess" "Done built" || notify-send "System Rebuild Failed"
+  sudo nixos-rebuild switch --flake .#nixos && notify-send "System Rebuild Sucess" "Done built" || notify-send "System Rebuild Failed"
 
 # update flake
 [group('nix')]
