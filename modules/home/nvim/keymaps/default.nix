@@ -8,6 +8,10 @@
   ];
   programs.nixvim.keymaps = [
     {
+      action = "<cmd>Neotree toggle<CR>";
+      key = "<leader>e";
+    }
+    {
       action = ":noh<CR>";
       key = "<Esc>";
       mode = "n";

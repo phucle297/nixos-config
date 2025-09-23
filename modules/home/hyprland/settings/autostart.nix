@@ -5,7 +5,7 @@
     "waybar &"
     "fcitx5 &"
     # GUI
-    "[workspace 2 silent] firefox"
+    "[workspace 2 silent] zen"
     "[workspace 3 silent] teams-for-linux"
     "[workspace 3 silent] slack"
     # "[workspace 3 silent] thunderbird"
