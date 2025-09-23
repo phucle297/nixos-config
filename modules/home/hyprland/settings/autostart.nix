@@ -2,6 +2,8 @@
   wayland.windowManager.hyprland.settings."exec-once" = [
     "rfkill unblock bluetooth"
     "1password"
+    "swww-daemon"
+    "swww img ~/Pictures/wallpapers/horizontal.jpg"
     "waybar &"
     "fcitx5 &"
     # GUI
