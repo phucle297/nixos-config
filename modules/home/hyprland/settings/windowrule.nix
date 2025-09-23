@@ -32,7 +32,8 @@
       "idleinhibit fullscreen, class:^(firefox)$"
 
       # screenshot
-      "move -1440 -920,class:(flameshot)"
+      # "move -1440 -920,class:(flameshot)"
+      "move 0 0,class:(flameshot)"
       "pin,class:(flameshot)"
       "noborder,class:(flameshot)"
       "stayfocused,class:(flameshot)"

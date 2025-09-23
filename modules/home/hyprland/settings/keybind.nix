@@ -41,23 +41,22 @@
         ", XF86AudioPause, exec, playerctl pause"
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl prev"
-        ", XF86Lock, exec, hyprctl lock"
+        ", XF86Lock, exec, hyprlock"
       ]
       ++ (
         # workspaces
         # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
         builtins.concatLists (
-          builtins.genList
-            (
-              i:
-              let
-                ws = i + 1;
-              in
-              [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ]
-            ) 10
+          builtins.genList (
+            i:
+            let
+              ws = i + 1;
+            in
+            [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          ) 10
         )
       );
 

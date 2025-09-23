@@ -30,12 +30,12 @@
         };
       };
     };
-    yazi = {
-      enable = true;
-      lazyLoad.settings.keymap = [
-        "<leader>e"
-      ];
-    };
+    # yazi = {
+    #   enable = true;
+    #   lazyLoad.settings.keymap = [
+    #     "<leader>e"
+    #   ];
+    # };
     neo-tree = {
       enable = true;
       window = {
@@ -63,6 +63,23 @@
     };
     bufferline = {
       enable = true;
+    };
+    neo-tree-nvim = {
+      enable = true;
+      settings = {
+        filesystem = {
+          use_libuv_file_watcher = true;
+          follow_current_file = true;
+          hijack_netrw_behavior = "open_current";
+        };
+        window = {
+          mappings = {
+            "c" = "copy_to_clipboard";
+            "x" = "cut_to_clipboard";
+            "p" = "paste_from_clipboard";
+          };
+        };
+      };
     };
     # floaterm = { enable = true; settings = { keymap_toggle = "<A-i>"; shell = "fish"; title = null;
     #   };

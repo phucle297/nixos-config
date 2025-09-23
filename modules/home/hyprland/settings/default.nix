@@ -1,6 +1,6 @@
 {
   imports = [
-    ./animation.nix
+    # ./animation.nix
     ./autostart.nix
     ./decoration.nix
     ./env.nix
