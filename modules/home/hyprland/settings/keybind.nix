@@ -15,7 +15,7 @@
         "$mod, RETURN, exec, kitty"
         "$mod, O, exec, focus-or-open zen class:zen"
         "$mod, Q, killactive"
-        "$mod, E, dolphin"
+        "$mod, E, exec, dolphin"
         "$mod, F, fullscreen, 0"
         "$mod, M, fullscreen, 1"
         "$mod SHIFT, F, togglefloating"
