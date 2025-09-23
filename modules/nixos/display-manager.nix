@@ -5,7 +5,7 @@ let
       FormPosition = "left";
       ForceHideCompletePassword = true;
     };
-    embeddedTheme = "pixel_sakura_static";
+    embeddedTheme = "hyprland_kath";
   };
 in
 {
