@@ -3,7 +3,7 @@
     monitor = [
       # "DP-1,2560x1440@74.920,1440x915, 1"
       # "DP-2,2560x1440@74.920,0x0,1, transform, 1"
-      "eDP-1,2880x1800@120.00,0x0,1"
+      "eDP-1,2880x1800@120.00,0x0,1.5"
     ];
     workspace = [
       # "1,monitor:DP-2,default:true"

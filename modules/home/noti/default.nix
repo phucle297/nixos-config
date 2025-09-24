@@ -38,7 +38,7 @@
         on-notify = "none";
       };
 
-      "app-name=thunderbird" = {
+      "app-name=Thunderbird" = {
         on-notify = "none";
       };
 

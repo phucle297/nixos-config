@@ -204,8 +204,8 @@ in
     style = ''
       * {
         font-family: JetbrainsMono Nerd Font;
-        font-size: 16px; /* Increase this value to scale up text and other elements */
-        min-height: 24px; /* Increase this to make the bar taller */
+        font-size: 10px; /* Increase this value to scale up text and other elements */
+        min-height: 0; /* Increase this to make the bar taller */
         padding-right: 2px;
         padding-left: 2px;
         padding-bottom: 0px;
