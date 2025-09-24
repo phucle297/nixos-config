@@ -18,10 +18,13 @@ in
     };
     settings = {
       mainBar = {
-        # Your custom layout from the first config
+        reload_style_on_change = true;
         layer = "top";
         position = "top";
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "cava"
+        ];
         modules-center = [
           "clock"
         ];
@@ -49,6 +52,30 @@ in
           on-click = "activate";
         };
 
+        cava = {
+          "framerate" = 60;
+          "sensitivity" = 10;
+          "autosens" = 1;
+          "bars" = 14;
+          "hide_on_silence" = true;
+          "format_silent" = "quiet";
+          "method" = "pipewire";
+          "bar_delimiter" = 0;
+          "noise_reduction" = 0.77;
+          "format-icons" = [
+            "▁"
+            "▂"
+            "▃"
+            "▄"
+            "▅"
+            "▆"
+            "▇"
+            "█"
+          ];
+          "actions" = {
+            "on-click-right" = "mode";
+          };
+        };
         "tray" = {
           icon-size = 16;
           spacing = 10;
@@ -76,7 +103,7 @@ in
 
         "cpu" = {
           interval = 1;
-          format = "{usage:>2}%   {icon0}{icon1}{icon2}{icon3}";
+          format = "{usage:>2}%  ";
           format-icons = [
             " "
             "▂"
@@ -91,7 +118,7 @@ in
 
         "memory" = {
           interval = 30;
-          format = "  {used:0.1f}G/{total:0.1f}G";
+          format = "{used:0.1f}G/{total:0.1f}G  ";
         };
 
         "custom/uptime" = {
