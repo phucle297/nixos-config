@@ -1,6 +1,15 @@
 {
   programs.nixvim.keymaps = [
     {
+      action = ":LazyGit<CR>";
+      key = "<leader>gg";
+      mode = "n";
+      options = {
+        silent = true;
+        desc = "Open lazygit";
+      };
+    }
+    {
       action = ":GitBlameToggle<CR>";
       key = "<leader>gb";
       mode = "n";
