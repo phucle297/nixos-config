@@ -20,13 +20,33 @@
       v = "nvim";
       ll = "exa -l -g --icons -a";
       gg = "ghq get";
-      g = "git";
       k = "kubectl";
       ssh = "kitten ssh";
       grep = "rg";
       y = "yazi";
       c = "http";
       l = "ls -la";
+
+      g = "git";
+      gaa = "git add .";
+      gd = "git diff";
+      gl = "git pull";
+      gup = "git pull --rebase";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gc = "git commit";
+      gcmsg = "git commit -m";
+      "gc!" = "git commit --amend";
+      gb = "git branch";
+      gco = "git checkout";
+      gba = "git branch -a";
+      glo = "git log --oneline --graph --decorate --all";
+      ga = "git add";
+      gm = "git merge";
+      gst = "git status";
+      gsta = "git stash -u";
+      gstp = "git stash pop";
+      gstd = "git stash drop";
     };
     interactiveShellInit = ''
       set fish_greeting

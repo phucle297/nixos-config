@@ -4,7 +4,6 @@
     userEmail = "permees@nexondv.com";
     userName = "Le Dam Duy Phuc";
     aliases = {
-      g = "git";
       a = "!git status --short | peco | awk '{print $2}' | xargs git add";
       d = "diff";
       co = "checkout";
@@ -35,9 +34,9 @@
       pull = {
         rebase = true;
       };
-      # http = {
-      # sslCAInfo = "/etc/ssl/certs/cert.crt";
-      # };
+      http = {
+        # sslCAInfo = "/etc/ssl/certs/cert.crt";
+      };
     };
   };
 }
