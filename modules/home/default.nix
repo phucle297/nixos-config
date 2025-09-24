@@ -5,7 +5,7 @@
   # my-module = import ./my-module.nix;
   imports = [
     ./direnv
-    # ./email
+    ./email
     ./browser
     ./flameshot
     ./git
