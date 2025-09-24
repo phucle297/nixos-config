@@ -6,10 +6,11 @@
     "waybar &"
     "fcitx5 &"
     # GUI
+    "[workspace 1 silent] kitty"
     "[workspace 2 silent] zen"
     "[workspace 3 silent] teams-for-linux"
     "[workspace 3 silent] slack"
     "[workspace 3 silent] thunderbird"
-    "[workspace 9 silent] 1password"
+    "[workspace 4 silent] 1password"
   ];
 }
