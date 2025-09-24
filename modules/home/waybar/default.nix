@@ -18,39 +18,67 @@ in
     };
     settings = {
       mainBar = {
+        # Your custom layout from the first config
         layer = "top";
-        margin-bottom = 10;
-        margin-top = 10;
-        spacing = 6;
-        reload_style_on_change = true;
-        modules-left = [
-          "hyprland/workspaces"
-          "cpu"
-          "memory"
-          "disk"
-          "cava"
-        ];
-        modules-center = [ "mpris" ];
-        modules-right = [
-          "bluetooth"
-          "network"
-          "battery"
-          "backlight"
-          "pulseaudio"
+        position = "top";
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [
           "clock"
         ];
-        cava = {
-          "framerate" = 60;
-          "sensitivity" = 10;
-          "autosens" = 1;
-          "bars" = 14;
-          "hide_on_silence" = true;
-          "format_silent" = "quiet";
-          "method" = "pipewire";
-          "bar_delimiter" = 0;
-          "noise_reduction" = 0.77;
-          "format-icons" = [
-            "▁"
+        modules-right = [
+          "pulseaudio"
+          "custom/uptime"
+          "backlight"
+          "battery"
+          "network"
+          "cpu"
+          "memory"
+          "tray"
+          "custom/power"
+        ];
+
+        # Module definitions
+        "hyprland/workspaces" = {
+          format = "{name}: {icon}";
+          format-icons = {
+            "active" = "";
+            "default" = "";
+          };
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+          on-click = "activate";
+        };
+
+        "tray" = {
+          icon-size = 16;
+          spacing = 10;
+        };
+
+        # Custom modules from your original config
+        "custom/music" = {
+          format = "  {}";
+          escape = true;
+          interval = 5;
+          tooltip = false;
+          exec = "playerctl metadata --format='{{ artist }} - {{ title }}'";
+          on-click = "playerctl play-pause";
+          max-length = 50;
+        };
+
+        "network" = {
+          format-wifi = "{bandwidthDownBits} 󰤢 ";
+          format-ethernet = "{bandwidthDownBits} 󰈀 ";
+          format-disconnected = "No Network 󰤠 ";
+          interval = 5;
+          on-click = "gnome-control-center network";
+          tooltip = false;
+        };
+
+        "cpu" = {
+          interval = 1;
+          format = "{usage:>2}%   {icon0}{icon1}{icon2}{icon3}";
+          format-icons = [
+            " "
             "▂"
             "▃"
             "▄"
@@ -59,27 +87,57 @@ in
             "▇"
             "█"
           ];
-          "actions" = {
-            "on-click-right" = "mode";
-          };
         };
-        backlight = {
-          format = "{icon}";
-          tooltip-format = "{percent}% {icon}";
+
+        "memory" = {
+          interval = 30;
+          format = "  {used:0.1f}G/{total:0.1f}G";
+        };
+
+        "custom/uptime" = {
+          format = "{}";
+          interval = 1600;
+          exec = "sh -c '(uptime -p)'";
+        };
+
+        "pulseaudio" = {
+          format = "{volume}% {icon}";
+          format-muted = "";
+          format-icons = {
+            "default" = [
+              ""
+              ""
+              " "
+            ];
+          };
+          on-click = "pavucontrol";
+        };
+
+        "custom/power" = {
+          tooltip = false;
+          on-click = "wlogout &";
+          format = "⏻";
+        };
+
+        # Modules from the NixOS example to keep
+        "backlight" = {
+          format = "{percent}% {icon}"; # Changed to your preference
           format-icons = [
             "󰃞"
             "󰃝"
             "󰃟"
             "󰃠"
           ];
+          tooltip-format = "{percent}% {icon}";
         };
-        battery = {
+
+        "battery" = {
           states = {
             good = 95;
             warning = 30;
             critical = 20;
           };
-          format = "{icon}";
+          format = "{capacity}% {icon}"; # Changed to your preference
           format-icons = [
             ""
             ""
@@ -87,51 +145,10 @@ in
             ""
             ""
           ];
+          tooltip-format = "{time} left";
         };
 
-        pulseaudio = {
-          scroll-step = 5;
-          format = "{icon} {volume}%";
-          format-muted = "{icon} 0%";
-          on-click = "pamixer -t";
-          format-icons = {
-            headphone = "";
-            hands-free = "󱡏";
-            headset = "󱡏";
-            phone = "";
-            portable = "󰓃";
-            car = " ";
-            default = [
-              ""
-              ""
-              ""
-            ];
-          };
-        };
-        bluetooth = {
-          format = "";
-          format-disabled = "󰂲";
-          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
-          on-click = "bzmenu -l rofi";
-        };
-        network = {
-          format-wifi = "";
-          format-ethernet = "";
-          tooltip-format = "{essid} ({signalStrength}%)";
-          format-disconnected = "⚠";
-          interval = 1;
-          on-click = "networkmanager_dmenu";
-        };
-        disk = {
-          interval = 60;
-          format = " {percentage_used}%";
-          path = "/";
-          tooltip = true;
-          tooltip-format = "{used} / {total}";
-          warning = 80;
-          critical = 90;
-        };
-        clock = {
+        "clock" = {
           format = "{:%H:%M %a}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           "calendar" = {
@@ -153,145 +170,129 @@ in
             "on-scroll-down" = "shift_down";
           };
         };
-        cpu = {
-          interval = 15;
-          format = " {usage}%";
-          max-length = 10;
-        };
-        memory = {
-          interval = 30;
-          format = " {}%";
-          max-length = 10;
-        };
-        mpris = {
-          interval = 1;
-          format = "{title} - <i>{artist}</i>";
-          # format-paused = "{title} - {artist}";
-          title-len = 40;
-          artist-len = 20;
-          player-icons = {
-            default = "▶";
-            mpv = "🎵";
-          };
-          status-icons = {
-            paused = "⏸";
-          };
-          # "ignored-players"= ["firefox"];
-        };
-        "custom/launcher" = {
-          format = " ";
-          on-click = "rofi -show drun";
-          on-click-right = "killall rofi";
-        };
-        "custom/power" = {
-          format = " ";
-          on-click = "rofi -show rofi-power-menu";
-        };
-        "hyprland/workspaces" = {
-          format = "{icon}";
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
-          on-click = "activate";
-          format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "󰙯";
-            "6" = "";
-            "10" = "";
-            "active" = "";
-            "default" = "";
-          };
-        };
       };
     };
+
+    # CSS styling
     style = ''
       * {
-        font-family: "JetBrainsMonoNerdFont";
-        font-size: 12px;
+        font-family: JetbrainsMono Nerd Font;
+        font-size: 16px; /* Increase this value to scale up text and other elements */
+        min-height: 24px; /* Increase this to make the bar taller */
+        padding-right: 2px;
+        padding-left: 2px;
+        padding-bottom: 0px;
       }
 
-      tooltip {
-        background: @base01;
-      }
-
-      .modules-left,
-      .modules-right,
-      .modules-center {
-        margin: 0 8px;
-        padding: 0 1rem;
-        border-radius: 3rem;
-        color: @base07;
-        background: @base01;
-      }
-
-      .disabled,
-      .muted,
-      .off {
-        color: @base04;
-      }
-
-      .modules-right {
-        padding-left: 1rem;
-        padding-right: 0;
-      }
-
-      .modules-left {
-        padding-left: 0;
-        padding-right: 1rem;
+      #waybar {
+        background: transparent;
+        color: #c6d0f5;
+        margin: 2px 2px;
       }
 
       #workspaces {
-        border-radius: 3rem;
-        background: @base02;
+        border-radius: 5px;
+        margin: 5px;
+        background: #101010;
+        margin-left: 2px;
       }
 
       #workspaces button {
+        color: #babbf1;
+        border-radius: 5px;
+        padding: 0.4rem;
+      }
+
+      #workspaces button.active {
+        color: #99d1db;
+        border-radius: 5px;
+      }
+
+      button {
         background: transparent;
-        border-radius: 3rem;
       }
 
-      .modules-left #workspaces button,
-      .modules-left #workspaces button.focused,
-      .modules-left #workspaces button.active {
-        border: 0;
-      }
-      #workspaces button.focused,
-      #workspaces button.active,
-      #workspaces button:hover
-      {
-        color: @base00;
-        background: @base0C;
+      #workspaces button:hover {
+        background: #1e1e1e;
+        border: 0px solid transparent;
       }
 
-      #workspaces button.urgent {
-        color: @base00;
-        background: @base09;
+      #custom-music,
+      #tray,
+      #backlight,
+      #clock,
+      #battery,
+      #pulseaudio,
+      #network,
+      #cpu,
+      #memory,
+      #custom-lock,
+      #custom-power,
+      #custom-uptime {
+        background-color: #101010;
+        padding: 0.5rem 1rem;
+        margin: 5px 0;
       }
 
       #clock {
-        border-radius: 3rem;
-        color: @base00;
-        background: @base0C;
+        color: #8caaee;
+        border-radius: 5px;
       }
 
-      /* Using steps() instead of linear as a timing function to limit cpu usage */
-      #battery.critical:not(.charging) {
-        color: @base07;
-        background: @base08;
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-timing-function: steps(12);
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+
+      #battery {
+        color: #a6d189;
       }
 
-      @keyframes blink {
-        to {
-          background-color: @base07;
-          color: @base08;
-        }
+      #battery.charging {
+        color: #a6d189;
+      }
+
+      #battery.warning:not(.charging) {
+        color: #e78284;
+      }
+
+      #backlight {
+        color: #e5c890;
+      }
+
+      #backlight,
+      #battery {
+        border-radius: 0;
+      }
+
+      #pulseaudio {
+        color: #ea999c;
+        border-radius: 5px 0px 0px 5px;
+      }
+
+
+      #custom-music {
+        color: #ca9ee6;
+        border-radius: 5px;
+      }
+
+      #custom-lock {
+        color: #babbf1;
+      }
+
+      #custom-power {
+        margin-right: 1rem;
+        border-radius: 0px 5px 5px 0px;
+        color: #e78284;
+      }
+
+      tooltip {
+        background: #101010;
+        color: #c6d0f5;
+        border-radius: 5px;
+      }
+
+      #workspaces button {
+        padding: 0.4rem;
+        border-radius: 5px;
+        background: transparent;
       }
     '';
   };
-
 }
