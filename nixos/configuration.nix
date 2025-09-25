@@ -1,9 +1,17 @@
-{ inputs, outputs, ... }:
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules
     ./hardware-configuration.nix
+  ];
+  environment.systemPackages = with pkgs; [
+    (pkgs.callPackage ../modules/custom-app/notion-app.nix { })
   ];
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
