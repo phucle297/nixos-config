@@ -77,5 +77,14 @@
           ];
         };
       };
+
+      nixpkgs.overlays = [
+        (final: prev: {
+          niri = prev.niri.overrideAttrs (old: {
+            doCheck = false;
+          });
+        })
+      ];
+
     };
 }

@@ -12,7 +12,7 @@
     ./hyprland
     ./i18n
     ./kitty
-    # ./niri
+    ./niri
     ./noti
     ./packages
     ./nvim

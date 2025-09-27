@@ -9,7 +9,7 @@
     ./hyprland.nix
     ./password.nix
     ./i18n.nix
-    # ./niri.nix
+    ./niri.nix
     # ./keyboard
     ./networking.nix
     ./graphic.nix

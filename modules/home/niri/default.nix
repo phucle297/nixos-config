@@ -1,14 +1,15 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib;
 let
   binds =
-    { suffixes
-    , prefixes
-    , substitutions ? { }
-    ,
+    {
+      suffixes,
+      prefixes,
+      substitutions ? { },
     }:
     let
       replacer = replaceStrings (attrNames substitutions) (attrValues substitutions);
@@ -35,15 +36,13 @@ let
         };
       pairs =
         attrs: fn:
-        concatMap
-          (
-            key:
-            fn {
-              inherit key;
-              action = attrs.${key};
-            }
-          )
-          (attrNames attrs);
+        concatMap (
+          key:
+          fn {
+            inherit key;
+            action = attrs.${key};
+          }
+        ) (attrNames attrs);
     in
     listToAttrs (pairs prefixes (prefix: pairs suffixes (suffix: [ (format prefix suffix) ])));
 in
@@ -63,26 +62,38 @@ in
     };
 
     outputs = {
-      "DP-1" = {
+      # "DP-1" = {
+      #   enable = true;
+      #   mode = {
+      #     width = 2560;
+      #     height = 1440;
+      #     refresh = 74.920;
+      #   };
+      #   position = {
+      #     x = 1440;
+      #     y = 915;
+      #   };
+      # };
+      # "DP-2" = {
+      #   enable = true;
+      #   mode = {
+      #     width = 2560;
+      #     height = 1440;
+      #     refresh = 74.920;
+      #   };
+      #   transform.rotation = 90;
+      #   position = {
+      #     x = 0;
+      #     y = 0;
+      #   };
+      # };
+      "eDP-1" = {
         enable = true;
         mode = {
-          width = 2560;
-          height = 1440;
-          refresh = 74.920;
+          width = 2880;
+          height = 1800;
+          refresh = 120.00000;
         };
-        position = {
-          x = 1440;
-          y = 915;
-        };
-      };
-      "DP-2" = {
-        enable = true;
-        mode = {
-          width = 2560;
-          height = 1440;
-          refresh = 74.920;
-        };
-        transform.rotation = 90;
         position = {
           x = 0;
           y = 0;
@@ -214,6 +225,7 @@ in
       delay-ms = 250;
       max-speed = 12000;
     };
+
     binds =
       with config.lib.niri.actions;
       let
@@ -266,15 +278,13 @@ in
         }
         (binds {
           suffixes = builtins.listToAttrs (
-            map
-              (n: {
-                name = toString n;
-                value = [
-                  "workspace"
-                  n
-                ];
-              })
-              (range 1 9)
+            map (n: {
+              name = toString n;
+              value = [
+                "workspace"
+                n
+              ];
+            }) (range 1 9)
           );
           prefixes."Mod" = "focus";
           prefixes."Mod+Shift" = "move-window-to";
