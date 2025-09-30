@@ -22,7 +22,8 @@ in
         layer = "top";
         position = "top";
         modules-left = [
-          "hyprland/workspaces"
+          # "hyprland/workspaces"
+          "niri/workspaces"
           "cava"
         ];
         modules-center = [
@@ -40,6 +41,20 @@ in
           "custom/power"
         ];
 
+        "niri/workspaces" = {
+          "format" = "{icon}";
+          "format-icons" = {
+            # Named workspaces
+            # (you need to configure them in niri)
+            "browser" = "";
+            "discord" = "";
+            "chat" = "<b></b>";
+
+            # Icons by state
+            "active" = "";
+            "default" = "";
+          };
+        };
         # Module definitions
         "hyprland/workspaces" = {
           format = "{name}: {icon}";

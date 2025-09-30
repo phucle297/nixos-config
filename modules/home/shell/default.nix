@@ -85,7 +85,7 @@
               ghq list -p
               ls -ad * | perl -pe "s#^#$PWD/#" | grep -v \.git
               ls -ad $HOME/Developments/*/* | grep -v \.git
-              ls -ad $HOME/nixos-config/**/*/
+              # ls -ad $HOME/nixos-config/**/*/
           end | sed -e 's/\/$//' | awk '!a[$0]++' | _custom_fzf_change_directory $argv
         '';
       };
