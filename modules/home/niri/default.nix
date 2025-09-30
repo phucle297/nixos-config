@@ -101,10 +101,10 @@ in
       };
     };
     workspaces = {
-      "09-spotify" = {
-        open-on-output = "DP-1";
-        name = "spotify";
-      };
+      # "09-spotify" = {
+      #   open-on-output = "DP-1";
+      #   name = "spotify";
+      # };
       "03-chat" = {
         open-on-output = "DP-2";
         name = "chat";
@@ -150,12 +150,17 @@ in
     };
     overview.zoom = 0.5;
     spawn-at-startup = [
-      { command = [ "waybar" ]; }
+      {
+        command = [
+          "sh"
+          "-c"
+          "pgrep waybar || waybar"
+        ];
+      }
+      # { command = [ "waybar" ]; }
       { command = [ "firefox" ]; }
       { command = [ "slack" ]; }
       { command = [ "teams-for-linux" ]; }
-      { command = [ "thunderbird" ]; }
-      { command = [ "spotify" ]; }
     ];
     window-rules = [
       {

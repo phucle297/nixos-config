@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     # GUI
     vlc
+    wl-mirror
     # xfce.thunar
     kdePackages.dolphin
     teams-for-linux
