@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = [
-    (pkgs.writeShellScriptBin "focus-or-open" (builtins.readFile ./scripts/focus-or-open.sh))
   ];
   wayland.windowManager.hyprland = {
     settings = {
@@ -13,7 +12,8 @@
       ];
       bind = [
         "$mod, RETURN, exec, kitty"
-        "$mod, O, exec, focus-or-open zen class:zen"
+        "$mod, O, exec, zen"
+        "$mod, B, exec, firefox"
         "$mod, Q, killactive"
         "$mod, E, exec, dolphin"
         "$mod, F, fullscreen, 0"

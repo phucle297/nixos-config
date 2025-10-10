@@ -11,7 +11,7 @@
   services.kanata = {
     enable = true;
     keyboards.alice = {
-      configFile = ./kenkyo.kbd;
+      configFile = ./hhkb.kbd;
       devices = [
         "/dev/input/by-id/usb-0416_Gaming_Keyboard-event-kbd"
       ];
