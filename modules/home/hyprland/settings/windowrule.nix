@@ -21,10 +21,10 @@
       "pin, title:^(Picture-in-Picture)$"
       "move 69.5% 4%, title:^(Picture-in-Picture)$"
 
-      "bordersize 0, floating:0, onworkspace:w[tv1]"
-      "rounding 0, floating:0, onworkspace:w[tv1]"
-      "bordersize 0, floating:0, onworkspace:f[1]"
-      "rounding 0, floating:0, onworkspace:f[1]"
+      # "bordersize 0, floating:0, onworkspace:w[tv1]"
+      # "rounding 0, floating:0, onworkspace:w[tv1]"
+      # "bordersize 0, floating:0, onworkspace:f[1]"
+      # "rounding 0, floating:0, onworkspace:f[1]"
 
       # idle inhibit while watching videos
       "idleinhibit focus, class:^(mpv|.+exe|celluloid)$"

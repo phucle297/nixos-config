@@ -13,17 +13,17 @@ in
 
   programs.waybar = {
     enable = true;
-    # systemd = {
-    #   enable = true;
-    # };
+    systemd = {
+      enable = true;
+    };
     settings = {
       mainBar = {
         reload_style_on_change = true;
         layer = "top";
         position = "top";
         modules-left = [
-          # "hyprland/workspaces"
-          "niri/workspaces"
+          "hyprland/workspaces"
+          # "niri/workspaces"
           "cava"
         ];
         modules-center = [
