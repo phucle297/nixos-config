@@ -5,14 +5,134 @@
   ...
 }:
 let
-  lock-false = {
-    Value = false;
-    Status = "locked";
+  # ---  CONFIGURATION  ---
+  # Change your desired Catppuccin flavour here.
+  # Options: "latte", "frappe", "macchiato", "mocha"
+  flavour = "mocha";
+
+  # Set to true for a more uniform completion widget.
+  samecolorrows = false;
+  # --- END CONFIGURATION ---
+
+  # All Catppuccin palettes, translated into a Nix attribute set.
+  palettes = {
+    latte = {
+      rosewater = "#dc8a78";
+      flamingo = "#dd7878";
+      pink = "#ea76cb";
+      mauve = "#8839ef";
+      red = "#d20f39";
+      maroon = "#e64553";
+      peach = "#fe640b";
+      yellow = "#df8e1d";
+      green = "#40a02b";
+      teal = "#179299";
+      sky = "#04a5e5";
+      sapphire = "#209fb5";
+      blue = "#1e66f5";
+      lavender = "#7287fd";
+      text = "#4c4f69";
+      subtext1 = "#5c5f77";
+      subtext0 = "#6c6f85";
+      overlay2 = "#7c7f93";
+      overlay1 = "#8c8fa1";
+      overlay0 = "#9ca0b0";
+      surface2 = "#acb0be";
+      surface1 = "#bcc0cc";
+      surface0 = "#ccd0da";
+      base = "#eff1f5";
+      mantle = "#e6e9ef";
+      crust = "#dce0e8";
+    };
+    frappe = {
+      rosewater = "#f2d5cf";
+      flamingo = "#eebebe";
+      pink = "#f4b8e4";
+      mauve = "#ca9ee6";
+      red = "#e78284";
+      maroon = "#ea999c";
+      peach = "#ef9f76";
+      yellow = "#e5c890";
+      green = "#a6d189";
+      teal = "#81c8be";
+      sky = "#99d1db";
+      sapphire = "#85c1dc";
+      blue = "#8caaee";
+      lavender = "#babbf1";
+      text = "#c6d0f5";
+      subtext1 = "#b5bfe2";
+      subtext0 = "#a5adce";
+      overlay2 = "#949cbb";
+      overlay1 = "#838ba7";
+      overlay0 = "#737994";
+      surface2 = "#626880";
+      surface1 = "#51576d";
+      surface0 = "#414559";
+      base = "#303446";
+      mantle = "#292c3c";
+      crust = "#232634";
+    };
+    macchiato = {
+      rosewater = "#f4dbd6";
+      flamingo = "#f0c6c6";
+      pink = "#f5bde6";
+      mauve = "#c6a0f6";
+      red = "#ed8796";
+      maroon = "#ee99a0";
+      peach = "#f5a97f";
+      yellow = "#eed49f";
+      green = "#a6da95";
+      teal = "#8bd5ca";
+      sky = "#91d7e3";
+      sapphire = "#7dc4e4";
+      blue = "#8aadf4";
+      lavender = "#b7bdf8";
+      text = "#cad3f5";
+      subtext1 = "#b8c0e0";
+      subtext0 = "#a5adcb";
+      overlay2 = "#939ab7";
+      overlay1 = "#8087a2";
+      overlay0 = "#6e738d";
+      surface2 = "#5b6078";
+      surface1 = "#494d64";
+      surface0 = "#363a4f";
+      base = "#24273a";
+      mantle = "#1e2030";
+      crust = "#181926";
+    };
+    mocha = {
+      rosewater = "#f5e0dc";
+      flamingo = "#f2cdcd";
+      pink = "#f5c2e7";
+      mauve = "#cba6f7";
+      red = "#f38ba8";
+      maroon = "#eba0ac";
+      peach = "#fab387";
+      yellow = "#f9e2af";
+      green = "#a6e3a1";
+      teal = "#94e2d5";
+      sky = "#89dceb";
+      sapphire = "#74c7ec";
+      blue = "#89b4fa";
+      lavender = "#b4befe";
+      text = "#cdd6f4";
+      subtext1 = "#bac2de";
+      subtext0 = "#a6adc8";
+      overlay2 = "#9399b2";
+      overlay1 = "#7f849c";
+      overlay0 = "#6c7086";
+      surface2 = "#585b70";
+      surface1 = "#45475a";
+      surface0 = "#313244";
+      base = "#1e1e2e";
+      mantle = "#181825";
+      crust = "#11111b";
+    };
   };
-  lock-true = {
-    Value = true;
-    Status = "locked";
-  };
+
+  # Select the correct palette based on the chosen flavour.
+  palette = palettes.${flavour} or palettes.mocha;
+
 in
 {
   imports = [
@@ -21,6 +141,182 @@ in
   # programs.floorp = {
   #   enable = true;
   # };
+  programs.qutebrowser = {
+    enable = true;
+    settings = lib.mkForce {
+      # Completion
+      colors.completion.category = {
+        bg = palette.base;
+        fg = palette.green;
+        border.bottom = palette.mantle;
+        border.top = palette.overlay2;
+      };
+      colors.completion.even.bg = palette.mantle;
+      colors.completion.odd.bg = if samecolorrows then palette.mantle else palette.crust;
+      colors.completion.fg = palette.subtext0;
+      colors.completion.item.selected = {
+        bg = palette.surface2;
+        fg = palette.text;
+        match.fg = palette.rosewater;
+        border.bottom = palette.surface2;
+        border.top = palette.surface2;
+      };
+      colors.completion.match.fg = palette.text;
+      colors.completion.scrollbar = {
+        bg = palette.crust;
+        fg = palette.surface2;
+      };
+
+      # Downloads
+      colors.downloads = {
+        bar.bg = palette.base;
+        error = {
+          fg = palette.red;
+          bg = palette.base;
+        };
+        start = {
+          fg = palette.blue;
+          bg = palette.base;
+        };
+        stop = {
+          fg = palette.green;
+          bg = palette.base;
+        };
+        system.bg = "none";
+        system.fg = "none";
+      };
+
+      # Hints
+      colors.hints = {
+        bg = palette.peach;
+        fg = palette.mantle;
+        match.fg = palette.subtext1;
+      };
+      hints.border = "1px solid ${palette.mantle}";
+
+      # Keyhints
+      colors.keyhint = {
+        bg = palette.mantle;
+        fg = palette.text;
+        suffix.fg = palette.subtext1;
+      };
+
+      # Messages
+      colors.messages = {
+        error = {
+          bg = palette.overlay0;
+          fg = palette.red;
+          border = palette.mantle;
+        };
+        info = {
+          bg = palette.overlay0;
+          fg = palette.text;
+          border = palette.mantle;
+        };
+        warning = {
+          bg = palette.overlay0;
+          fg = palette.peach;
+          border = palette.mantle;
+        };
+      };
+
+      # Prompts
+      colors.prompts = {
+        bg = palette.mantle;
+        fg = palette.text;
+        border = "1px solid ${palette.overlay0}";
+        selected = {
+          bg = palette.surface2;
+          fg = palette.rosewater;
+        };
+      };
+
+      # Statusbar
+      colors.statusbar = {
+        normal = {
+          bg = palette.base;
+          fg = palette.text;
+        };
+        insert = {
+          bg = palette.crust;
+          fg = palette.rosewater;
+        };
+        command = {
+          bg = palette.base;
+          fg = palette.text;
+          private = {
+            bg = palette.base;
+            fg = palette.subtext1;
+          };
+        };
+        caret = {
+          bg = palette.base;
+          fg = palette.peach;
+          selection.fg = palette.peach;
+        };
+        progress.bg = palette.base;
+        passthrough = {
+          bg = palette.base;
+          fg = palette.peach;
+        };
+        private = {
+          bg = palette.mantle;
+          fg = palette.subtext1;
+        };
+        url = {
+          error.fg = palette.red;
+          fg = palette.text;
+          hover.fg = palette.sky;
+          success.http.fg = palette.teal;
+          success.https.fg = palette.green;
+          warn.fg = palette.yellow;
+        };
+      };
+
+      # Tabs
+      colors.tabs = {
+        bar.bg = palette.crust;
+        even = {
+          bg = palette.surface2;
+          fg = palette.overlay2;
+        };
+        odd = {
+          bg = palette.surface1;
+          fg = palette.overlay2;
+        };
+        selected = {
+          even = {
+            bg = palette.base;
+            fg = palette.text;
+          };
+          odd = {
+            bg = palette.base;
+            fg = palette.text;
+          };
+        };
+        indicator = {
+          error = palette.red;
+          system = "none";
+        };
+      };
+
+      # Context Menus
+      colors.contextmenu = {
+        menu = {
+          bg = palette.base;
+          fg = palette.text;
+        };
+        disabled = {
+          bg = palette.mantle;
+          fg = palette.overlay0;
+        };
+        selected = {
+          bg = palette.overlay0;
+          fg = palette.rosewater;
+        };
+      };
+    };
+  };
   programs.zen-browser = {
     enable = true;
     languagePacks = [ "en-US" ];

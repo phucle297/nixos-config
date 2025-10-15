@@ -25,7 +25,7 @@
     ./security.nix
     ./stylix.nix
     ./steam.nix
-    # ./vpn.nix
+    ./vpn.nix
   ];
 
   nix.settings = {
