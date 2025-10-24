@@ -53,7 +53,9 @@
             DisabledAddons = true;
           };
           "Hotkey/TriggerKeys" = {
-            "0" = "Alt+Z";
+            "0" = "Control+Shift+Shift_L";
+            "1" = "Control+Shift+Control_L";
+            "2" = "Alt+Z";
           };
           Hotkey = {
             # Enumerate when press trigger key repeatedly

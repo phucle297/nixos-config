@@ -30,40 +30,43 @@
         };
       };
     };
-    neo-tree = {
+    yazi = {
       enable = true;
-      enableDiagnostics = true;
-      enableGitStatus = true;
-      enableModifiedMarkers = true;
-      enableRefreshOnWrite = true;
-      closeIfLastWindow = true;
-      popupBorderStyle = "rounded"; # Type: null or one of “NC”, “double”, “none”, “rounded”, “shadow”, “single”, “solid” or raw lua code
-      buffers = {
-        bindToCwd = false;
-        followCurrentFile = {
-          enabled = true;
-        };
-      };
-      window = {
-        mappings = {
-          c = "copy_to_clipboard";
-          x = "cut_to_clipboard";
-          p = "paste_from_clipboard";
-          l = "open";
-          h = "close_node";
-          # h.__raw = ''
-          #   function(state)
-          #     local node = state.tree:get_node()
-          #     if node.type == "directory" and node:is_expanded() then
-          #       require("neo-tree.sources.filesystem.commands").close_node(state)
-          #     else
-          #       require("neo-tree.sources.filesystem.commands").navigate_up(state)
-          #     end
-          #   end
-          # '';
-        };
-      };
     };
+    # neo-tree = {
+    #   enable = true;
+    #   enableDiagnostics = true;
+    #   enableGitStatus = true;
+    #   enableModifiedMarkers = true;
+    #   enableRefreshOnWrite = true;
+    #   closeIfLastWindow = true;
+    #   popupBorderStyle = "rounded"; # Type: null or one of “NC”, “double”, “none”, “rounded”, “shadow”, “single”, “solid” or raw lua code
+    #   buffers = {
+    #     bindToCwd = false;
+    #     followCurrentFile = {
+    #       enabled = true;
+    #     };
+    #   };
+    #   window = {
+    #     mappings = {
+    #       c = "copy_to_clipboard";
+    #       x = "cut_to_clipboard";
+    #       p = "paste_from_clipboard";
+    #       l = "open";
+    #       h = "close_node";
+    #       # h.__raw = ''
+    #       #   function(state)
+    #       #     local node = state.tree:get_node()
+    #       #     if node.type == "directory" and node:is_expanded() then
+    #       #       require("neo-tree.sources.filesystem.commands").close_node(state)
+    #       #     else
+    #       #       require("neo-tree.sources.filesystem.commands").navigate_up(state)
+    #       #     end
+    #       #   end
+    #       # '';
+    #     };
+    #   };
+    # };
     leap = {
       enable = true;
       equivalenceClasses = [
@@ -89,6 +92,8 @@
     toggleterm = {
       enable = true;
       settings = {
+        open_mapping = "[[<c-\\>]]";
+        direction = "float";
         size = 20;
         hide_numbers = true;
         shade_terminals = true;
@@ -96,10 +101,10 @@
         start_in_insert = true;
         insert_mappings = true;
         persist_size = true;
-        direction = "horizontal";
         close_on_exit = true;
         float_opts = {
-          border = "single";
+          border = "curved";
+          # border = "single";
           # width = function()
           # return math.floor(vim.o.columns * 0.8)
           # end, -- 80% of the screen width
@@ -108,6 +113,9 @@
           # end, -- 60% of the screen height
           # -- width = 200;
           # -- height = 50;
+          width = 130;
+          height = 30;
+
           winblend = 3;
           highlights = {
             border = "Normal";

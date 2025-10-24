@@ -5,7 +5,7 @@
     ./fzf.nix
     ./noice.nix
     ./window.nix
-    ./tree.nix
+    ./term.nix
   ];
   programs.nixvim.keymaps = [
     {
@@ -54,6 +54,14 @@
         desc = "Go to end";
       };
     }
+    # {
+    #   action = "<cmd>Neotree toggle<CR>";
+    #   key = "<leader>e";
+    #   options = {
+    #     silent = true;
+    #     desc = "Toggle file explorer";
+    #   };
+    # }
     {
       action = ":Yazi<CR>";
       key = "<leader>e";

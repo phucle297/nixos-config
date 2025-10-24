@@ -156,7 +156,9 @@
         };
       };
     };
-
+    tailwind-tools = {
+      enable = true;
+    };
   };
 
 }
