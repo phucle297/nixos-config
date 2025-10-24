@@ -26,7 +26,7 @@
         ignorecase = false;
       };
       ghq = {
-        root = "~/Developments";
+        root = "~/pj";
       };
       push = {
         default = "simple";

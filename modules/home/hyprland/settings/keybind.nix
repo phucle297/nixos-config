@@ -12,6 +12,7 @@
       ];
       bind = [
         "$mod, RETURN, exec, kitty"
+        "CTRL ALT, L, exec, hyprlock"
         "$mod, O, exec, zen"
         "$mod, B, exec, firefox"
         "$mod, Q, killactive"
