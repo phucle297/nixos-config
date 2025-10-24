@@ -54,15 +54,15 @@
         desc = "Go to end";
       };
     }
-    # {
-    #   action = ":Yazi<CR>";
-    #   key = "<leader>e";
-    #   mode = "n";
-    #   options = {
-    #     silent = true;
-    #     desc = "yazi toggle";
-    #   };
-    # }
+    {
+      action = ":Yazi<CR>";
+      key = "<leader>e";
+      mode = "n";
+      options = {
+        silent = true;
+        desc = "yazi toggle";
+      };
+    }
     {
       action = ":update<CR>";
       key = "<leader>w";
